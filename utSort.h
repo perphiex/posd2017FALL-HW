@@ -20,6 +20,13 @@ void initTestData(std::list<Shape *> *shapeList)
     shapeList->push_back(new Triangle({0, 0}, {6, 0}, {3, 3}, "a9, p14.485"));
 }
 
+void deleteShapeList(std::list<Shape *> *shapeList)
+{
+    for (auto item : shapeList)
+        delete item;
+    delete shapeList;
+}
+
 TEST(Sort, sortByIncreasingPerimeter)
 {
     std::list<Shape *> *shapeList = new std::list<Shape *>();
@@ -36,6 +43,8 @@ TEST(Sort, sortByIncreasingPerimeter)
     ASSERT_EQ((*(it++))->getShapeName(), "a28.2743, p18.8495");
     ASSERT_EQ((*(it++))->getShapeName(), "a10, p22");
     ASSERT_EQ((*(it++))->getShapeName(), "a20, p42");
+
+    deleteShapeList(shapeList);
 }
 
 TEST(Sort, sortByDecreasingPerimeter)
@@ -54,6 +63,8 @@ TEST(Sort, sortByDecreasingPerimeter)
     ASSERT_EQ((*(it++))->getShapeName(), "a3, p12.325");
     ASSERT_EQ((*(it++))->getShapeName(), "a5, p12");
     ASSERT_EQ((*(it++))->getShapeName(), "a3.1415, p6.2831");
+
+    deleteShapeList(shapeList);
 }
 
 TEST(Sort, sortByIncreasingArea)
@@ -72,6 +83,8 @@ TEST(Sort, sortByIncreasingArea)
     ASSERT_EQ((*(it++))->getShapeName(), "a12.5663, p12.5663");
     ASSERT_EQ((*(it++))->getShapeName(), "a20, p42");
     ASSERT_EQ((*(it++))->getShapeName(), "a28.2743, p18.8495");
+
+    deleteShapeList(shapeList);
 }
 
 TEST(Sort, sortByDecreasingArea)
@@ -90,6 +103,8 @@ TEST(Sort, sortByDecreasingArea)
     ASSERT_EQ((*(it++))->getShapeName(), "a5, p12");
     ASSERT_EQ((*(it++))->getShapeName(), "a3.1415, p6.2831");
     ASSERT_EQ((*(it++))->getShapeName(), "a3, p12.325");
+
+    deleteShapeList(shapeList);
 }
 
 TEST(Sort, sortByIncreasingCompactness)
@@ -108,6 +123,8 @@ TEST(Sort, sortByIncreasingCompactness)
     ASSERT_EQ((*(it++))->getShapeName(), "a9, p14.485");
     ASSERT_EQ((*(it++))->getShapeName(), "a12.5663, p12.5663");
     ASSERT_EQ((*(it++))->getShapeName(), "a28.2743, p18.8495");
+
+    deleteShapeList(shapeList);
 }
 
 #endif
