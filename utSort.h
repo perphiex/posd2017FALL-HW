@@ -22,7 +22,7 @@ void initTestData(std::list<Shape *> *shapeList)
 
 void deleteShapeList(std::list<Shape *> *shapeList)
 {
-    for (auto item : shapeList)
+    for (auto item : *shapeList)
         delete item;
     delete shapeList;
 }
