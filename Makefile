@@ -1,6 +1,6 @@
-INC_DIR = include
-SRC_DIR = src
-TEST_DIR = test
+INC_DIR = ./include
+SRC_DIR = ./src
+TEST_DIR = ./test
 EXE_NAME = hw2
 CXX = g++
 CPPFLAGS = -std=c++11
