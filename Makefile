@@ -1,27 +1,33 @@
 INC_DIR = include
-EXE_NAME = hw1
+SRC_DIR = src
+TEST_DIR = test
+EXE_NAME = hw2
+CPPFLAGS = "-std=c++11"
 
 all: $(EXE_NAME)
 
-$(EXE_NAME): main.o Shapes.o Media.o Sort.o
+$(EXE_NAME): main.o term.o atom.o number.o variable.o
 ifeq ($(OS), Windows_NT)
-	$(CXX) -o $(EXE_NAME) main.o Shapes.o Media.o Sort.o -lgtest
+	$(CXX) -o $(EXE_NAME) main.o term.o atom.o number.o variable.o -lgtest
 else
-	$(CXX) -o $(EXE_NAME) main.o Shapes.o Media.o Sort.o -lgtest -lpthread
+	$(CXX) -o $(EXE_NAME) main.o term.o atom.o number.o variable.o -lgtest -lpthread
 endif
 	
 	
-main.o: main.cpp utSort.h
-	$(CXX) -std=gnu++0x -c main.cpp
+main.o: $(SRC_DIR)/main.cpp $(TEST_DIR)/utTerm.h
+	$(CXX) $(CPPFLAGS) -c $(SRC_DIR)/main.cpp
 
-Shapes.o: $(INC_DIR)/Shapes.h Shapes.cpp
-	$(CXX) -std=gnu++0x -c Shapes.cpp
+term.o: $(INC_DIR)/term.h $(SRC_DIR)/term.cpp
+	$(CXX) $(CPPFLAGS) -c $(SRC_DIR)/term.cpp
 
-Media.o: $(INC_DIR)/Media.h Media.cpp
-	$(CXX) -std=gnu++0x -c Media.cpp
+atom.o: $(INC_DIR)/atom.h $(SRC_DIR)/atom.cpp
+	$(CXX) $(CPPFLAGS) -c $(SRC_DIR)/atom.cpp
 
-Sort.o: $(INC_DIR)/Sort.h Sort.cpp
-	$(CXX) -std=gnu++0x -c Sort.cpp
+number.o: $(INC_DIR)/number.h $(SRC_DIR)/number.cpp
+	$(CXX) $(CPPFLAGS) -c $(SRC_DIR)/number.cpp
+
+variable.o: $(INC_DIR)/variable.h $(SRC_DIR)/variable.cpp
+	$(CXX) $(CPPFLAGS) -c $(SRC_DIR)/variable.cpp
 
 clean:	
 ifeq ($(OS), Windows_NT)
