@@ -4,6 +4,7 @@
 #include <sstream>
 #include <string>
 #include "term.h"
+#include "struct.h"
 #include "variable.h"
 
 using std::ostringstream;

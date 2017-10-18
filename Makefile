@@ -6,6 +6,7 @@ TEST = .
 EXE_NAME = hw3
 OBJS = term.o atom.o number.o variable.o struct.o
 UTESTS = utTerm.h utVariable.h utStruct.h
+
 all: $(EXE_NAME)
 
 $(EXE_NAME): main.o $(OBJS)
@@ -18,7 +19,7 @@ endif
 main.o: main.cpp $(TEST)/$(UTESTS)
 	$(CXX) $(CPPFLAGS) -c main.cpp
 
-%.o: $(SRC)/%.cpp
+%.o: $(SRC)/%.cpp $(INCLUDE)/%.h
 	g++ -std=gnu++0x -c $<
 
 clean:	
@@ -28,8 +29,12 @@ else
 	rm -f *.o $(EXE_NAME)
 endif
 
-test:
+test: format
+	clear
 	make clean
 	make
 	./$(EXE_NAME)
 	make clean
+
+format:
+	clang-format -i -style=file *.h *.cpp

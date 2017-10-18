@@ -4,8 +4,11 @@
 #include <sstream>
 #include <string>
 #include <vector>
-#include "atom.h"
 #include "term.h"
+#include "atom.h"
+#include "variable.h"
+
+class Atom;
 
 using std::ostringstream;
 using std::string;
@@ -22,6 +25,7 @@ class Struct : public Term {
     Term* args(int) const;
     string symbol() const;
     string value() const;
+    size_t size() const;
     bool match(Term&);
 };
 
