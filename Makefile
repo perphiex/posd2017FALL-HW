@@ -1,34 +1,25 @@
-INC_DIR = include
-SRC_DIR = src
-TEST_DIR = test
-EXE_NAME = hw2
 CXX = g++
 CPPFLAGS = -std=gnu++0x
-
+SRC = .
+INCLUDE = .
+TEST = .
+EXE_NAME = hw3
+OBJS = term.o atom.o number.o variable.o struct.o
+UTESTS = utTerm.h utVariable.h utStruct.h
 all: $(EXE_NAME)
 
-$(EXE_NAME): main.o term.o atom.o number.o variable.o
+$(EXE_NAME): main.o $(OBJS)
 ifeq ($(OS), Windows_NT)
-	$(CXX) -o $(EXE_NAME) main.o term.o atom.o number.o variable.o -lgtest
+	$(CXX) -o $(EXE_NAME) main.o $(OBJS) -lgtest
 else
-	$(CXX) -o $(EXE_NAME) main.o term.o atom.o number.o variable.o -lgtest -lpthread
+	$(CXX) -o $(EXE_NAME) main.o $(OBJS) -lgtest -lpthread
 endif
 	
-	
-main.o: $(SRC_DIR)/main.cpp $(TEST_DIR)/utTerm.h
-	$(CXX) $(CPPFLAGS) -c $(SRC_DIR)/main.cpp
+main.o: main.cpp $(TEST)/$(UTESTS)
+	$(CXX) $(CPPFLAGS) -c main.cpp
 
-term.o: $(INC_DIR)/term.h $(SRC_DIR)/term.cpp
-	$(CXX) $(CPPFLAGS) -c $(SRC_DIR)/term.cpp
-
-atom.o: $(INC_DIR)/atom.h $(SRC_DIR)/atom.cpp
-	$(CXX) $(CPPFLAGS) -c $(SRC_DIR)/atom.cpp
-
-number.o: $(INC_DIR)/number.h $(SRC_DIR)/number.cpp
-	$(CXX) $(CPPFLAGS) -c $(SRC_DIR)/number.cpp
-
-variable.o: $(INC_DIR)/variable.h $(SRC_DIR)/variable.cpp
-	$(CXX) $(CPPFLAGS) -c $(SRC_DIR)/variable.cpp
+%.o: $(SRC)/%.cpp
+	g++ -std=gnu++0x -c $<
 
 clean:	
 ifeq ($(OS), Windows_NT)
@@ -36,3 +27,9 @@ ifeq ($(OS), Windows_NT)
 else
 	rm -f *.o $(EXE_NAME)
 endif
+
+test:
+	make clean
+	make
+	./$(EXE_NAME)
+	make clean
