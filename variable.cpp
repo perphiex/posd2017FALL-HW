@@ -15,7 +15,7 @@ string Variable::value() const {
 bool Variable::match(Term& term) {
     if (_term == nullptr) {
         if (this != &term) _term = &term;
-    } else
-        _term->match(term);
-    return value() == term.value();
+        return true;
+    }
+    return _term->match(term);
 }
