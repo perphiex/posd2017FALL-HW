@@ -3,9 +3,9 @@ CPPFLAGS = -std=gnu++0x
 SRC = .
 INCLUDE = .
 TEST = .
-EXE_NAME = hw3
-OBJS = term.o atom.o number.o variable.o struct.o
-UTESTS = utTerm.h utVariable.h utStruct.h
+EXE_NAME = hw4
+OBJS = term.o atom.o number.o variable.o struct.o list.o
+UTESTS = utTerm.h utVariable.h utStruct.h utList.h
 
 all: $(EXE_NAME)
 

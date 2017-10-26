@@ -2,6 +2,7 @@
 #include "utStruct.h"
 #include "utTerm.h"
 #include "utVariable.h"
+#include "utList.h"
 
 int main(int argc, char** argv) {
     testing::InitGoogleTest(&argc, argv);
