@@ -5,9 +5,9 @@ Variable::Variable(string s) {
     _term = nullptr;
 }
 
-string Variable::symbol() const { return _symbol; }
+string Variable::symbol() { return _symbol; }
 
-string Variable::value() const {
+string Variable::value() {
     if (_term == nullptr) return _symbol;
     return _term->value();
 }
@@ -19,3 +19,5 @@ bool Variable::match(Term& term) {
     }
     return _term->match(term);
 }
+
+Variable* Variable::getVariable() { return this; }

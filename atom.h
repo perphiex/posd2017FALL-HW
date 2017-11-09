@@ -2,9 +2,8 @@
 #define ATOM_H
 
 #include <string>
+
 #include "term.h"
-#include "struct.h"
-#include "variable.h"
 
 using std::string;
 
@@ -14,8 +13,8 @@ class Atom : public Term {
 
    public:
     Atom(string);
-    string symbol() const;
-    string value() const;
+    string symbol();
+    string value();
     bool match(Term&);
 };
 

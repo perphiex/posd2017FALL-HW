@@ -13,9 +13,10 @@ class Variable : public Term {
 
    public:
     Variable(string);
-    string symbol() const;
-    string value() const;
+    string symbol();
+    string value();
     bool match(Term&);
+    Variable* getVariable();
 };
 
 #endif

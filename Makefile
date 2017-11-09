@@ -3,9 +3,9 @@ CPPFLAGS = -std=gnu++0x
 SRC = .
 INCLUDE = .
 TEST = .
-EXE_NAME = hw4
-OBJS = term.o atom.o number.o variable.o struct.o list.o
-UTESTS = utTerm.h utVariable.h utStruct.h utList.h
+EXE_NAME = hw5
+OBJS = term.o atom.o number.o variable.o struct.o list.o global.o scanner.o parser.o
+UTESTS = utTerm.h utVariable.h utStruct.h utList.h utParser.h
 
 all: $(EXE_NAME)
 
@@ -20,7 +20,7 @@ main.o: main.cpp $(TEST)/$(UTESTS)
 	$(CXX) $(CPPFLAGS) -c main.cpp
 
 %.o: $(SRC)/%.cpp $(INCLUDE)/%.h
-	g++ -std=gnu++0x -c $<
+	$(CXX) -std=gnu++0x -c $<
 
 clean:	
 ifeq ($(OS), Windows_NT)

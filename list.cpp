@@ -1,45 +1,41 @@
 #include "list.h"
 
+List::List(Term* head, Term* tail) : Struct(Atom("."), head, tail) {}
+
+List* List::getList() { return this; }
+
 Term* List::head() const {
-    if (_elements.empty()) throw string("Accessing head in an empty list");
-    return _elements.front();
+    if (_args.empty()) throw string("Accessing head in an empty list");
+    return _args.front();
 }
 
 List* List::tail() const {
-    if (_elements.empty()) throw string("Accessing tail in an empty list");
-    return new List(vector<Term*>(_elements.begin() + 1, _elements.end()));
+    if (_args.empty()) throw string("Accessing tail in an empty list");
+    return _args[_TAIL]->getList();
 }
 
-string List::symbol() const {
+string List::symbol() {
     ostringstream oss;
     oss << "[";
-    for (int i = 0; i < size(); i++) {
-        oss << _elements[i]->symbol();
-        if (i != size() - 1) oss << ", ";
+    List* list;
+    for (list = this; list && list->_args[_TAIL];
+         list = list->_args[_TAIL]->getList()) {
+        oss << (list != this ? ", " : "");
+        oss << list->_args[_HEAD]->symbol();
     }
     oss << "]";
     return oss.str();
 }
 
-string List::value() const {
+string List::value() {
     ostringstream oss;
     oss << "[";
-    for (int i = 0; i < size(); i++) {
-        oss << _elements[i]->value();
-        if (i != size() - 1) oss << ", ";
+    List* list;
+    for (list = this; list && list->_args[_TAIL];
+         list = list->_args[_TAIL]->getList()) {
+        oss << (list != this ? ", " : "");
+        oss << list->_args[_HEAD]->value();
     }
     oss << "]";
     return oss.str();
 }
-
-bool List::match(Term& term) {
-    if (dynamic_cast<Variable*>(&term) != nullptr) return term.match(*this);
-    List* list = dynamic_cast<List*>(&term);
-    if (list == nullptr) return false;
-    if (size() != list->size()) return false;
-    for (int i = 0; i < size(); i++)
-        if (!elements(i)->match(*(list->elements(i)))) return false;
-    return true;
-}
-Term* List::elements(int index) const { return _elements[index]; }
-size_t List::size() const { return _elements.size(); }

@@ -15,8 +15,8 @@ class Number : public Term {
 
    public:
     Number(double);
-    string symbol() const;
-    string value() const;
+    string symbol();
+    string value();
     bool match(Term&);
 };
 

@@ -1,19 +1,16 @@
 #include "struct.h"
 
-Struct::Struct(Atom atom, vector<Term*> args) {
-    _name = new Atom(atom.symbol());
-    _args = args;
-}
+Struct::Struct(Atom atom, vector<Term*> args) : _name(atom), _args(args) {}
 
-Atom Struct::name() const { return *_name; }
+Atom Struct::name() const { return _name; }
 
 Term* Struct::args(int index) const { return _args[index]; }
 
 size_t Struct::size() const { return _args.size(); }
 
-string Struct::symbol() const {
+string Struct::symbol() {
     ostringstream oss;
-    oss << _name->symbol() << "(";
+    oss << _name.symbol() << "(";
     for (int i = 0; i < _args.size(); i++) {
         oss << _args[i]->symbol();
         if (i != _args.size() - 1) oss << ", ";
@@ -22,9 +19,9 @@ string Struct::symbol() const {
     return oss.str();
 }
 
-string Struct::value() const {
+string Struct::value() {
     ostringstream oss;
-    oss << _name->value() << "(";
+    oss << _name.value() << "(";
     for (int i = 0; i < _args.size(); i++) {
         oss << _args[i]->value();
         if (i != _args.size() - 1) oss << ", ";
@@ -34,8 +31,8 @@ string Struct::value() const {
 }
 
 bool Struct::match(Term& term) {
-    if (dynamic_cast<Variable*>(&term) != nullptr) return term.match(*this);
-    Struct* structure = dynamic_cast<Struct*>(&term);
+    if (term.getVariable()) return term.match(*this);
+    Struct* structure = term.getStruct();
     if (structure == nullptr) return false;
     Atom structName = structure->name();
     if (!name().match(structName)) return false;
@@ -44,3 +41,8 @@ bool Struct::match(Term& term) {
         if (!args(i)->match(*(structure->args(i)))) return false;
     return true;
 }
+
+Struct::Struct(Atom name, Term* head, Term* tail)
+    : _name(name), _args({head, tail}) {}
+
+Struct* Struct::getStruct() { return this; }

@@ -6,13 +6,11 @@ Number::Number(double number) {
     _value = oss.str();
 }
 
-string Number::symbol() const { return _value; }
+string Number::symbol() { return _value; }
 
-string Number::value() const { return _value; }
+string Number::value() { return _value; }
 
 bool Number::match(Term& term) {
-    if (dynamic_cast<Variable*>(&term) != nullptr ||
-        dynamic_cast<Struct*>(&term) != nullptr)
-        return term.match(*this);
+    if (term.getVariable()) return term.match(*this);
     return value() == term.value();
 }
