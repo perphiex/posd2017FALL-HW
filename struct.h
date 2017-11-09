@@ -19,7 +19,7 @@ class Struct : public Term {
     Term* args(int) const;
     string symbol();
     string value();
-    size_t size() const;
+    size_t arity() const;
     bool match(Term&);
     Struct* getStruct();
 

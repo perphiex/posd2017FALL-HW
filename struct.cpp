@@ -6,7 +6,7 @@ Atom Struct::name() const { return _name; }
 
 Term* Struct::args(int index) const { return _args[index]; }
 
-size_t Struct::size() const { return _args.size(); }
+size_t Struct::arity() const { return _args.size(); }
 
 string Struct::symbol() {
     ostringstream oss;
@@ -36,8 +36,8 @@ bool Struct::match(Term& term) {
     if (structure == nullptr) return false;
     Atom structName = structure->name();
     if (!name().match(structName)) return false;
-    if (size() != structure->size()) return false;
-    for (int i = 0; i < size(); i++)
+    if (arity() != structure->arity()) return false;
+    for (int i = 0; i < arity(); i++)
         if (!args(i)->match(*(structure->args(i)))) return false;
     return true;
 }
