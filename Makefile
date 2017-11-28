@@ -1,40 +1,40 @@
-CXX = g++
-CPPFLAGS = -std=gnu++0x
-SRC = .
-INCLUDE = .
-TEST = .
-EXE_NAME = hw5
-OBJS = term.o atom.o number.o variable.o struct.o list.o global.o scanner.o parser.o
-UTESTS = utTerm.h utVariable.h utStruct.h utList.h utParser.h
+CXX = clang++
+CXXFLAGS = -std=c++11 -g
+LDFLAGS =
+LIBS = -lgtest -lpthread
 
-all: $(EXE_NAME)
-
-$(EXE_NAME): main.o $(OBJS)
 ifeq ($(OS), Windows_NT)
-	$(CXX) -o $(EXE_NAME) main.o $(OBJS) -lgtest
-else
-	$(CXX) -o $(EXE_NAME) main.o $(OBJS) -lgtest -lpthread
+	CXX = g++
+	CXXFLAGS = -std=gnu++0x
+	LIBS = -lgtest
 endif
+
+SRC_DIR = src
+INCLUDE_DIR = include
+TEST_DIR = 
+BUILD_DIR = build
+TEST_TARGET = main
+EXECUTE_FILE_NAME = hw6
+ 
+HEADERS=$(wildcard $(INCLUDE_DIR)/*.h)
+OBJECTS=$(patsubst $(INCLUDE_DIR)/%.h, $(BUILD_DIR)/%.o, $(HEADERS))
+TEST_HEADERS = $(wildcard $(TEST_DIR)/ut*.h)
+
+all: $(BUILD_DIR)/$(TEST_TARGET).o $(OBJECTS)
+	@$(CXX) -o $(EXECUTE_FILE_NAME) $(BUILD_DIR)/$(TEST_TARGET).o $(OBJECTS) $(LDFLAGS) $(LIBS)
 	
-main.o: main.cpp $(TEST)/$(UTESTS)
-	$(CXX) $(CPPFLAGS) -c main.cpp
-
-%.o: $(SRC)/%.cpp $(INCLUDE)/%.h
-	$(CXX) -std=gnu++0x -c $<
-
-clean:	
-ifeq ($(OS), Windows_NT)
-	del *.o *.exe
-else
-	rm -f *.o $(EXE_NAME)
-endif
-
-test: format
-	clear
-	make clean
-	make
-	./$(EXE_NAME)
-	make clean
-
-format:
-	clang-format -i -style=file *.h *.cpp
+$(BUILD_DIR)/$(TEST_TARGET).o: $(SRC_DIR)/$(TEST_TARGET).cpp $(TEST_HEADERS)
+	@$(CXX) $(CXXFLAGS) -c $(SRC_DIR)/$(TEST_TARGET).cpp -o $(BUILD_DIR)/$(TEST_TARGET).o
+ 
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp $(INCLUDE_DIR)/%.h
+	@$(CXX) $(CXXFLAGS) -c $< -o $@
+ 
+clean:
+	@$(RM) $(EXECUTE_FILE_NAME)
+	@$(RM) $(BUILD_DIR)/*
+ 
+test: clean all
+	@./$(EXECUTE_FILE_NAME)
+ 
+test.%: clean all
+	@./$(EXECUTE_FILE_NAME) --gtest_filter=$(or $(word 2,$(subst ., ,$@)),$(value 2)).*
