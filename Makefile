@@ -11,8 +11,8 @@ endif
 
 SRC_DIR = src
 INCLUDE_DIR = include
-TEST_DIR = 
-BUILD_DIR = build
+TEST_DIR = .
+BUILD_DIR = .
 TEST_TARGET = main
 EXECUTE_FILE_NAME = hw6
  
@@ -31,7 +31,7 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp $(INCLUDE_DIR)/%.h
  
 clean:
 	$(RM) $(EXECUTE_FILE_NAME)
-	$(RM) $(BUILD_DIR)/*
+	$(RM) $(BUILD_DIR)/*.o
  
 test: clean all
 	@./$(EXECUTE_FILE_NAME)
