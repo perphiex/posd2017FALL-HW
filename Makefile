@@ -21,17 +21,17 @@ OBJECTS=$(patsubst $(INCLUDE_DIR)/%.h, $(BUILD_DIR)/%.o, $(HEADERS))
 TEST_HEADERS = $(wildcard $(TEST_DIR)/ut*.h)
 
 all: $(BUILD_DIR)/$(TEST_TARGET).o $(OBJECTS)
-	@$(CXX) -o $(EXECUTE_FILE_NAME) $(BUILD_DIR)/$(TEST_TARGET).o $(OBJECTS) $(LDFLAGS) $(LIBS)
+	$(CXX) -o $(EXECUTE_FILE_NAME) $(BUILD_DIR)/$(TEST_TARGET).o $(OBJECTS) $(LDFLAGS) $(LIBS)
 	
 $(BUILD_DIR)/$(TEST_TARGET).o: $(SRC_DIR)/$(TEST_TARGET).cpp $(TEST_HEADERS)
-	@$(CXX) $(CXXFLAGS) -c $(SRC_DIR)/$(TEST_TARGET).cpp -o $(BUILD_DIR)/$(TEST_TARGET).o
+	$(CXX) $(CXXFLAGS) -c $(SRC_DIR)/$(TEST_TARGET).cpp -o $(BUILD_DIR)/$(TEST_TARGET).o
  
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp $(INCLUDE_DIR)/%.h
-	@$(CXX) $(CXXFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) -c $< -o $@
  
 clean:
-	@$(RM) $(EXECUTE_FILE_NAME)
-	@$(RM) $(BUILD_DIR)/*
+	$(RM) $(EXECUTE_FILE_NAME)
+	$(RM) $(BUILD_DIR)/*
  
 test: clean all
 	@./$(EXECUTE_FILE_NAME)
