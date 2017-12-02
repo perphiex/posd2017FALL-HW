@@ -10,16 +10,20 @@ ifeq ($(OS), Windows_NT)
 	PEEK = type utIterator.h
 endif
 
-SRC_DIR = src
-INCLUDE_DIR = include
+SRC_DIR = .
+INCLUDE_DIR = .
 TEST_DIR = .
 BUILD_DIR = .
 TEST_TARGET = main
 EXECUTE_FILE_NAME = hw7
  
-HEADERS=$(wildcard $(INCLUDE_DIR)/*.h)
+H_FILES = $(wildcard $(INCLUDE_DIR)/*.h)
+HEADERS = $(filter-out ./utIterator.h,$(H_FILES))
+
+
 OBJECTS=$(patsubst $(INCLUDE_DIR)/%.h, $(BUILD_DIR)/%.o, $(HEADERS))
 TEST_HEADERS = $(wildcard $(TEST_DIR)/ut*.h)
+
 
 all: $(BUILD_DIR)/$(TEST_TARGET).o $(OBJECTS)
 	$(CXX) -o $(EXECUTE_FILE_NAME) $(BUILD_DIR)/$(TEST_TARGET).o $(OBJECTS) $(LDFLAGS) $(LIBS)

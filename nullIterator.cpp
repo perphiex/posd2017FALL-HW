@@ -1,4 +1,4 @@
-#include "../include/nullIterator.h"
+#include "nullIterator.h"
 
 NullIterator::NullIterator(Term* term) : _term(term) {}
 
@@ -9,8 +9,8 @@ void NullIterator::next() { _isDone = true; }
 bool NullIterator::isDone() { return _isDone; }
 
 Term* NullIterator::currentItem() {
-    if (_isDone) {
-        return nullptr;
-    }
-    return _term;
+  if (_isDone) {
+    return nullptr;
+  }
+  return _term;
 }

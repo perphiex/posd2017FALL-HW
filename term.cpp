@@ -1,4 +1,4 @@
-#include "../include/term.h"
+#include "term.h"
 
 Atom* Term::getAtom() { return nullptr; }
 Number* Term::getNumber() { return nullptr; }
@@ -7,3 +7,5 @@ Struct* Term::getStruct() { return nullptr; }
 List* Term::getList() { return nullptr; }
 
 Iterator* Term::createIterator() { return new NullIterator(this); }
+
+Iterator* Term::createDFSIterator() { return new NullIterator(this); }

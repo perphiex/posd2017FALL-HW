@@ -1,13 +1,14 @@
-#include "include/term.h"
-#include "include/atom.h"
-#include "include/number.h"
-#include "include/variable.h"
-#include "include/struct.h"
-#include "include/list.h"
+#ifndef Iterator_H
+#define Iterator_H
 
-#include "include/iterator.h"
-#include "include/nullIterator.h"
-#include "include/listIterator.h"
-#include "include/structIterator.h"
-// #include "include/dfsIterator.h"
-// #include "include/bfsIterator.h"
+class Term;
+
+class Iterator {
+   public:
+    virtual void first() = 0;
+    virtual void next() = 0;
+    virtual bool isDone() = 0;
+    virtual Term* currentItem() = 0;
+};
+
+#endif

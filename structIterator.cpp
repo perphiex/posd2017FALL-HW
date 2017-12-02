@@ -1,4 +1,4 @@
-#include "../include/structIterator.h"
+#include "structIterator.h"
 
 StructIterator::StructIterator(Struct* structure) : _struct(structure) {}
 
