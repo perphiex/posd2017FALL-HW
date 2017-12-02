@@ -7,7 +7,7 @@
 #include "term.h"
 #include "atom.h"
 #include "struct.h"
-#include "termIterator.h"
+#include "iterator.h"
 #include "listIterator.h"
 
 class List : public Struct {
@@ -21,7 +21,7 @@ class List : public Struct {
     std::string symbol();
     std::string value();
     List* getList();
-    TermIterator* createIterator();
+    Iterator* createIterator();
     Term* head();
     List* tail();
 };

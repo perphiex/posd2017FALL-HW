@@ -6,7 +6,7 @@
 #include <vector>
 #include "term.h"
 #include "atom.h"
-#include "termIterator.h"
+#include "iterator.h"
 #include "structIterator.h"
 
 class Struct : public Term {
@@ -20,7 +20,7 @@ class Struct : public Term {
     std::string value();
     bool match(Term&);
     Struct* getStruct();
-    TermIterator* createIterator();
+    Iterator* createIterator();
     Atom functor();
     size_t arity();
     Term* args(size_t);

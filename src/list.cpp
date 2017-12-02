@@ -41,4 +41,4 @@ std::string List::value() {
     return oss.str();
 }
 
-TermIterator* List::createIterator() { return new ListIterator(this); }
+Iterator* List::createIterator() { return new ListIterator(this); }

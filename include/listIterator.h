@@ -1,11 +1,11 @@
 #ifndef LISTITERATOR_H
 #define LISTITERATOR_H
 
-#include "termIterator.h"
+#include "iterator.h"
 #include "term.h"
 #include "list.h"
 
-class ListIterator : public TermIterator {
+class ListIterator : public Iterator {
    private:
     List* _oriList;
     List* _currentList;
@@ -15,7 +15,7 @@ class ListIterator : public TermIterator {
     void first();
     void next();
     bool isDone();
-    Term* CurrentItem();
+    Term* currentItem();
 };
 
 #endif

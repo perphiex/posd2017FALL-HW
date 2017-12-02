@@ -1,0 +1,13 @@
+#include "include/term.h"
+#include "include/atom.h"
+#include "include/number.h"
+#include "include/variable.h"
+#include "include/struct.h"
+#include "include/list.h"
+
+#include "include/iterator.h"
+#include "include/nullIterator.h"
+#include "include/listIterator.h"
+#include "include/structIterator.h"
+// #include "include/dfsIterator.h"
+// #include "include/bfsIterator.h"

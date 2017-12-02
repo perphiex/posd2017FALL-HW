@@ -15,4 +15,4 @@ bool ListIterator::isDone() {
         return false;
 }
 
-Term* ListIterator::CurrentItem() { return _currentList->head(); }
+Term* ListIterator::currentItem() { return _currentList->head(); }

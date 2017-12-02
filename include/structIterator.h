@@ -1,11 +1,11 @@
 #ifndef STRUCTITERATOR_H
 #define STRUCTITERATOR_H
 
-#include "termIterator.h"
+#include "iterator.h"
 #include "term.h"
 #include "struct.h"
 
-class StructIterator : public TermIterator {
+class StructIterator : public Iterator {
    private:
     Struct* _struct;
     size_t _index;
@@ -15,7 +15,7 @@ class StructIterator : public TermIterator {
     void first();
     void next();
     bool isDone();
-    Term* CurrentItem();
+    Term* currentItem();
 };
 
 #endif

@@ -7,7 +7,7 @@
 #include <limits>
 #include "term.h"
 #include "variable.h"
-#include "termIterator.h"
+#include "iterator.h"
 
 class Number : public Term {
    private:

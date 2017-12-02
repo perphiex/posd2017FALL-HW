@@ -3,7 +3,7 @@
 
 #include <string>
 #include "term.h"
-#include "termIterator.h"
+#include "iterator.h"
 
 class Variable : public Term {
    private:

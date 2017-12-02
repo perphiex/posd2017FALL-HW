@@ -1,14 +1,14 @@
-#ifndef TERMITERATOR_H
-#define TERMITERATOR_H
+#ifndef Iterator_H
+#define Iterator_H
 
 class Term;
 
-class TermIterator {
+class Iterator {
    public:
     virtual void first() = 0;
     virtual void next() = 0;
     virtual bool isDone() = 0;
-    virtual Term* CurrentItem() = 0;
+    virtual Term* currentItem() = 0;
 };
 
 #endif

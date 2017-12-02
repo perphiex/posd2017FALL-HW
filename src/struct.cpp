@@ -45,4 +45,4 @@ bool Struct::match(Term& term) {
 
 Struct* Struct::getStruct() { return this; }
 
-TermIterator* Struct::createIterator() { return new StructIterator(this); }
+Iterator* Struct::createIterator() { return new StructIterator(this); }

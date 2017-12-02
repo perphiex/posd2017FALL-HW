@@ -8,4 +8,4 @@ void StructIterator::next() { _index++; }
 
 bool StructIterator::isDone() { return _index == _struct->arity(); }
 
-Term* StructIterator::CurrentItem() { return _struct->args(_index); }
+Term* StructIterator::currentItem() { return _struct->args(_index); }

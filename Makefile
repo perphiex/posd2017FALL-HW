@@ -7,6 +7,7 @@ ifeq ($(OS), Windows_NT)
 	CXX = g++
 	CXXFLAGS = -std=gnu++0x
 	LIBS = -lgtest
+	PEEK = type utIterator.h
 endif
 
 SRC_DIR = src
@@ -14,7 +15,7 @@ INCLUDE_DIR = include
 TEST_DIR = .
 BUILD_DIR = .
 TEST_TARGET = main
-EXECUTE_FILE_NAME = hw6
+EXECUTE_FILE_NAME = hw7
  
 HEADERS=$(wildcard $(INCLUDE_DIR)/*.h)
 OBJECTS=$(patsubst $(INCLUDE_DIR)/%.h, $(BUILD_DIR)/%.o, $(HEADERS))
@@ -22,6 +23,7 @@ TEST_HEADERS = $(wildcard $(TEST_DIR)/ut*.h)
 
 all: $(BUILD_DIR)/$(TEST_TARGET).o $(OBJECTS)
 	$(CXX) -o $(EXECUTE_FILE_NAME) $(BUILD_DIR)/$(TEST_TARGET).o $(OBJECTS) $(LDFLAGS) $(LIBS)
+	$(PEEK)
 	
 $(BUILD_DIR)/$(TEST_TARGET).o: $(SRC_DIR)/$(TEST_TARGET).cpp $(TEST_HEADERS)
 	$(CXX) $(CXXFLAGS) -c $(SRC_DIR)/$(TEST_TARGET).cpp -o $(BUILD_DIR)/$(TEST_TARGET).o

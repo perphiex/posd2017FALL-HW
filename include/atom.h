@@ -4,7 +4,7 @@
 #include <string>
 #include "term.h"
 #include "variable.h"
-#include "termIterator.h"
+#include "iterator.h"
 
 class Atom : public Term {
    private:

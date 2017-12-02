@@ -2,9 +2,9 @@
 #define NULLITERATOR_H
 
 #include "term.h"
-#include "termIterator.h"
+#include "iterator.h"
 
-class NullIterator : public TermIterator {
+class NullIterator : public Iterator {
    private:
     Term* _term;
     bool _isDone;
@@ -14,7 +14,7 @@ class NullIterator : public TermIterator {
     void first();
     void next();
     bool isDone();
-    Term* CurrentItem();
+    Term* currentItem();
 };
 
 #endif

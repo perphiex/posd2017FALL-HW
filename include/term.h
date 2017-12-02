@@ -9,7 +9,7 @@ class Number;
 class Variable;
 class Struct;
 class List;
-class TermIterator;
+class Iterator;
 
 class Term {
    public:
@@ -21,7 +21,7 @@ class Term {
     virtual Variable* getVariable();
     virtual Struct* getStruct();
     virtual List* getList();
-    virtual TermIterator* createIterator();
+    virtual Iterator* createIterator();
 };
 
 #endif

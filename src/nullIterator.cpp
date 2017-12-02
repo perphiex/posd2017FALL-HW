@@ -8,7 +8,7 @@ void NullIterator::next() { _isDone = true; }
 
 bool NullIterator::isDone() { return _isDone; }
 
-Term* NullIterator::CurrentItem() {
+Term* NullIterator::currentItem() {
     if (_isDone) {
         return nullptr;
     }

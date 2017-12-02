@@ -6,4 +6,4 @@ Variable* Term::getVariable() { return nullptr; }
 Struct* Term::getStruct() { return nullptr; }
 List* Term::getList() { return nullptr; }
 
-TermIterator* Term::createIterator() { return new NullIterator(this); }
+Iterator* Term::createIterator() { return new NullIterator(this); }
