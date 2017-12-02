@@ -26,10 +26,10 @@ TEST_HEADERS = $(wildcard $(TEST_DIR)/ut*.h)
 
 
 all: $(BUILD_DIR)/$(TEST_TARGET).o $(OBJECTS)
-	$(PEEK)
 	$(CXX) -o $(EXECUTE_FILE_NAME) $(BUILD_DIR)/$(TEST_TARGET).o $(OBJECTS) $(LDFLAGS) $(LIBS)
 	
 $(BUILD_DIR)/$(TEST_TARGET).o: $(SRC_DIR)/$(TEST_TARGET).cpp $(TEST_HEADERS)
+	$(PEEK)
 	$(CXX) $(CXXFLAGS) -c $(SRC_DIR)/$(TEST_TARGET).cpp -o $(BUILD_DIR)/$(TEST_TARGET).o
  
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp $(INCLUDE_DIR)/%.h
