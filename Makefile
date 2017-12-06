@@ -7,7 +7,7 @@ ifeq ($(OS), Windows_NT)
 	CXX = g++
 	CXXFLAGS = -std=gnu++0x
 	LIBS = -lgtest
-	PEEK = type utIterator.h
+	#PEEK = type utIterator.h
 endif
 
 SRC_DIR = .
