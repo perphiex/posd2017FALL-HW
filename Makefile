@@ -35,7 +35,8 @@ $(BUILD_DIR)/$(TEST_TARGET).o: $(SRC_DIR)/$(TEST_TARGET).cpp $(TEST_HEADERS)
  
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp $(INCLUDE_DIR)/%.h
 	@$(CXX) $(CXXFLAGS) -c $< -o $@
- 
+
+
 clean:
 	@$(RM) $(EXECUTE_FILE_PATH)/$(EXECUTE_FILE_NAME)
 	@$(RM) $(BUILD_DIR)/*.o
