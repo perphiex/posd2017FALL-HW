@@ -13,7 +13,7 @@ endif
 SRC_DIR = src
 INCLUDE_DIR = include
 TEST_DIR = .
-BUILD_DIR = build
+BUILD_DIR = .
 TEST_TARGET = main
 EXECUTE_FILE_NAME = hw7
 EXECUTE_FILE_PATH = .
