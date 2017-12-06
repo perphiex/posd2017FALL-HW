@@ -1,5 +1,5 @@
-#include "../include/tokenInfo.h"
-#include "../include/scanner.h"
+#include "tokenInfo.h"
+#include "scanner.h"
 
 Scanner::Scanner(std::string in)
     : _tokenInfo(TokenInfo::getInstance()), _buffer(in), _position(0) {}

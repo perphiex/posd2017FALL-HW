@@ -1,5 +1,5 @@
-#include "../include/atom.h"
-#include "../include/variable.h"
+#include "atom.h"
+#include "variable.h"
 
 Atom::Atom(std::string symbol) : _symbol(symbol) {}
 

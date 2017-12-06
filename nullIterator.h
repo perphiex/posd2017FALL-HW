@@ -15,4 +15,4 @@ class NullIterator : public Iterator<T> {
     T currentItem();
 };
 
-#include "../src/nullIterator.tpp"
+#include "nullIterator.tpp"

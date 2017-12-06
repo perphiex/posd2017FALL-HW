@@ -1,12 +1,12 @@
 #pragma once
 
-#include "include/atom.h"
-#include "include/number.h"
-#include "include/variable.h"
-#include "include/struct.h"
-#include "include/list.h"
+#include "atom.h"
+#include "number.h"
+#include "variable.h"
+#include "struct.h"
+#include "list.h"
 
-#include "include/iterator.h"
+#include "iterator.h"
 
 TEST(iterator, first) {
     Number one(1);

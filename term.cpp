@@ -1,5 +1,5 @@
-#include "../include/term.h"
-#include "../include/nullIterator.h"
+#include "term.h"
+#include "nullIterator.h"
 
 Atom* Term::getAtom() { return nullptr; }
 Number* Term::getNumber() { return nullptr; }

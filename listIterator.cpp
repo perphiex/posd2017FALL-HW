@@ -1,5 +1,5 @@
-#include "../include/list.h"
-#include "../include/listIterator.h"
+#include "list.h"
+#include "listIterator.h"
 
 ListIterator::ListIterator(List* list) : _oriList(list) {}
 

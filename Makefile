@@ -10,8 +10,8 @@ ifeq ($(OS), Windows_NT)
 	PEEK = type utIterator.h
 endif
 
-SRC_DIR = src
-INCLUDE_DIR = include
+SRC_DIR = .
+INCLUDE_DIR = .
 TEST_DIR = .
 BUILD_DIR = .
 TEST_TARGET = main

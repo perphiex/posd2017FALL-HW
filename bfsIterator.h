@@ -1,20 +1,20 @@
 #pragma once
 
-#include <stack>
+#include <queue>
 #include "iterator.h"
 
 template <typename T>
-class DFSIterator : public Iterator<T> {
+class BFSIterator : public Iterator<T> {
    public:
-    DFSIterator(T);
+    BFSIterator(T);
     void first();
     void next();
     bool isDone();
     T currentItem();
 
    private:
-    std::stack<Iterator<T>*> _itStack;
+    std::queue<Iterator<T>*> _itQueue;
     Iterator<T>* _it;
 };
 
-#include "../src/dfsIterator.tpp"
+#include "bfsIterator.tpp"

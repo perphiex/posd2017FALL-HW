@@ -1,10 +1,10 @@
 #include <sstream>
-#include "../include/term.h"
-#include "../include/atom.h"
-#include "../include/struct.h"
-#include "../include/structIterator.h"
-#include "../include/dfsIterator.h"
-#include "../include/bfsIterator.h"
+#include "term.h"
+#include "atom.h"
+#include "struct.h"
+#include "structIterator.h"
+#include "dfsIterator.h"
+#include "bfsIterator.h"
 
 Struct::Struct(Atom functor, std::vector<Term*> args)
     : _functor(functor), _args(args) {}
