@@ -1,12 +1,11 @@
 #pragma once
 
-#include "atom.h"
-#include "number.h"
-#include "variable.h"
-#include "struct.h"
-#include "list.h"
-
-#include "iterator.h"
+#include "include/atom.h"
+#include "include/number.h"
+#include "include/variable.h"
+#include "include/struct.h"
+#include "include/list.h"
+#include "include/iterator.h"
 
 TEST(iterator, first) {
     Number one(1);
@@ -398,4 +397,3 @@ TEST(iterator, listBFSIteratorData2) {
     it->next();
     EXPECT_TRUE(it->isDone());
 }
-

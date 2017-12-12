@@ -1,9 +1,9 @@
 #include <sstream>
 #include <iomanip>
 #include <limits>
-#include "term.h"
-#include "number.h"
-#include "variable.h"
+#include "../include/term.h"
+#include "../include/number.h"
+#include "../include/variable.h"
 
 Number::Number(double value) : _value(value) {}
 

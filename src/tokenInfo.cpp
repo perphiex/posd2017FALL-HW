@@ -1,4 +1,4 @@
-#include "tokenInfo.h"
+#include "../include/tokenInfo.h"
 
 TokenInfo::TokenInfo() {}
 TokenInfo* TokenInfo::_instance = nullptr;

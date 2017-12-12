@@ -1,5 +1,5 @@
-#include "term.h"
-#include "variable.h"
+#include "../include/term.h"
+#include "../include/variable.h"
 
 Variable::Variable(std::string symbol) : _symbol(symbol) {}
 

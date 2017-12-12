@@ -1,11 +1,11 @@
 #include <sstream>
-#include "term.h"
-#include "atom.h"
-#include "struct.h"
-#include "list.h"
-#include "listIterator.h"
-#include "dfsIterator.h"
-#include "bfsIterator.h"
+#include "../include/term.h"
+#include "../include/atom.h"
+#include "../include/struct.h"
+#include "../include/list.h"
+#include "../include/listIterator.h"
+#include "../include/dfsIterator.h"
+#include "../include/bfsIterator.h"
 
 List::List() : Struct(Atom("."), {}){};
 List::List(Term* head, Term* tail) : Struct(Atom("."), {head, tail}) {}
