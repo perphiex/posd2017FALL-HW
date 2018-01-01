@@ -8,7 +8,7 @@
             "type": "lldb",
             "request": "launch",
             "name": "Launch",
-            "program": "${workspaceRoot}/build/hw7",
+            "program": "${workspaceRoot}/hw8",
             "args": [],
             "cwd": "${workspaceRoot}"
         }

@@ -11,16 +11,34 @@ endif
 SOURCE_DIR = src
 BUILD_DIR = build
 EXE_FILE_DIR = .
+TEST_EXE_FILE_DIR = .
 
-EXE_FILE_NAME = hw7
+EXE_FILE_NAME = shell
+TEST_EXE_FILE_NAME = hw8
+
+MAIN_FILES = $(SOURCE_DIR)/main.cpp
+TEST_MAIN_FILES = $(SOURCE_DIR)/testMain.cpp
+
+MAIN_OBJECT_FILES = $(patsubst $(SOURCE_DIR)/%.cpp,$(BUILD_DIR)/%.o, $(MAIN_FILES))
+TEST_MAIN_OBJECT_FILES = $(patsubst $(SOURCE_DIR)/%.cpp,$(BUILD_DIR)/%.o, $(TEST_MAIN_FILES))
 
 SOURCES = $(wildcard $(SOURCE_DIR)/*.cpp)
 OBJECTS = $(patsubst $(SOURCE_DIR)/%.cpp,$(BUILD_DIR)/%.o, $(SOURCES))
 
+MAIN_OBJECTS = $(filter-out $(TEST_MAIN_OBJECT_FILES), $(OBJECTS))
+TEST_MAIN_OBJECTS = $(filter-out $(MAIN_OBJECT_FILES), $(OBJECTS))
+
 DEPENDS = ${OBJECTS:.o=.d}
 
-all: $(OBJECTS)
-	$(CXX) -o $(EXE_FILE_DIR)/$(EXE_FILE_NAME) $(OBJECTS) $(LIBS)
+all: testExe shell
+	
+	
+testExe: $(TEST_MAIN_OBJECTS) 
+	$(CXX) -o $(TEST_EXE_FILE_DIR)/$(TEST_EXE_FILE_NAME) $(TEST_MAIN_OBJECTS)  $(LIBS)
+
+shell: $(MAIN_OBJECTS)
+	$(CXX) -o $(EXE_FILE_DIR)/$(EXE_FILE_NAME) $(MAIN_OBJECTS) $(LIBS)
+
 
 $(BUILD_DIR)/%.o: $(SOURCE_DIR)/%.cpp
 	$(CXX) $(CXXFLAGS) -MMD -c $< -o $@
@@ -29,11 +47,12 @@ $(BUILD_DIR)/%.o: $(SOURCE_DIR)/%.cpp
 
 clean:
 	$(RM) $(EXE_FILE_DIR)/$(EXE_FILE_NAME)
+	$(RM) $(TEST_EXE_FILE_DIR)/$(TEST_EXE_FILE_NAME)
 	$(RM) $(BUILD_DIR)/*.o
 	$(RM) $(BUILD_DIR)/*.d
 
 test: all
-		$(EXE_FILE_DIR)/$(EXE_FILE_NAME)
+		$(TEST_EXE_FILE_DIR)/$(TEST_EXE_FILE_NAME)
 
 test.%: all
-		$(EXE_FILE_DIR)/$(EXE_FILE_NAME) --gtest_filter=$(or $(word 2,$(subst ., ,$@)),$(value 2)).*
+		$(TEST_EXE_FILE_DIR)/$(TEST_EXE_FILE_NAME) --gtest_filter=$(or $(word 2,$(subst ., ,$@)),$(value 2)).*

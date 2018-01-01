@@ -14,6 +14,16 @@ static Operators operatorsEnum(std::string tokenString) {
         return TERM;
 }
 
+static std::string operatorsEnumToString(Operators op) {
+     if (op == EQUALITY)
+        return "=";
+    else if (op == COMMA)
+        return ",";
+    else if (op == SEMICOLON)
+        return ";";
+    return "";
+}
+
 static int operatorsProity(Operators op) {
     switch (op) {
         case EQUALITY:
@@ -34,8 +44,10 @@ class Node {
     Node(Operators, Term*, Node*, Node*);
 
     bool evaluate();
+    std::string getResult();
     Operators payload;
     Term* term;
     Node* left;
     Node* right;
+    Node* parent;
 };

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <string>
 #include <vector>
 #include <stack>
 #include <map>
@@ -7,7 +8,6 @@
 class Term;
 class Atom;
 class Node;
-
 class Scanner;
 class TokenInfo;
 
@@ -32,7 +32,7 @@ class Parser {
     Term* createTerm();
     void createTerms();
     std::vector<Term*> getTerms();
-
-    void matchings();
+    void buildExpression();
+    std::string getResult();
     Node* expressionTree();
 };

@@ -1,3 +1,4 @@
+#include <sstream>
 #include "../include/atom.h"
 #include "../include/number.h"
 #include "../include/variable.h"
@@ -14,9 +15,13 @@ Parser::Parser(Scanner& scanner)
 std::vector<Term*> Parser::getArgs() {
     std::vector<Term*> terms;
     Term* term = nullptr;
-    while (!isEndOfStruct() &&
-           ((term = createTerm()) || _currentToken.second == ','))
+    while (!isEndOfStruct()) {
+        if (!((term = createTerm()) || _currentToken.second == ',')) {
+            break;
+        }
         if (term) terms.push_back(term);
+    }
+
     return terms;
 }
 
@@ -52,6 +57,7 @@ Term* Parser::createList() {
 
 Term* Parser::createTerm() {
     _currentToken = _scanner->nextToken();
+    if (_currentToken.first == ";") throw std::string("Unbalanced operator");
     return actualCreateTerm();
 }
 
@@ -83,7 +89,7 @@ bool Parser::isEndOfStruct() {
     return (_scanner->currentChar() == ')' || _scanner->currentChar() == ']');
 }
 
-void Parser::matchings() {
+void Parser::buildExpression() {
     _tree = nullptr;
     _terms.clear();
     Term* term = nullptr;
@@ -92,8 +98,10 @@ void Parser::matchings() {
     std::vector<Node*> nodes;
     Operators currentOp;
     _currentToken = _scanner->nextToken();
-    while ((_currentToken.second != _tokenInfo->EOS &&
-            _currentToken.first != ".")) {
+    auto nextToken = _scanner->peekNextToken();
+    while (!(
+        _currentToken.second == _tokenInfo->EOS ||
+        (_currentToken.first == "." && nextToken.second == _tokenInfo->EOS))) {
         term = actualCreateTerm();
         if (term) {
             _terms.push_back(term);
@@ -101,18 +109,20 @@ void Parser::matchings() {
         } else {
             currentOp = operatorsEnum(_currentToken.first);
             if (currentOp == SEMICOLON) _symbolTable.clear();
-            if (opStack.size() == 0 ||
-                operatorsProity(currentOp) > operatorsProity(opStack.top()))
-                opStack.push(currentOp);
-            else {
+            while (opStack.size() != 0 && operatorsProity(currentOp) <=
+                                              operatorsProity(opStack.top())) {
                 nodes.push_back(new Node(opStack.top()));
                 opStack.pop();
-                opStack.push(currentOp);
             }
+
+            opStack.push(currentOp);
         }
 
         _currentToken = _scanner->nextToken();
+        nextToken = _scanner->peekNextToken();
     }
+    _scanner->nextToken();
+    if (_currentToken.first != ".") throw std::string("Missing token '.'");
     while (opStack.size()) {
         nodes.push_back(new Node(opStack.top()));
         opStack.pop();
@@ -121,13 +131,29 @@ void Parser::matchings() {
     std::stack<Node*> nodeStack;
     for (auto element : nodes) {
         if (element->payload != TERM) {
+            if (nodeStack.size() < 2) {
+                throw std::string("Unexpected '" +
+                                  operatorsEnumToString(element->payload) +
+                                  "' before '.'");
+            }
             element->right = nodeStack.top();
+            element->right->parent = element;
             nodeStack.pop();
             element->left = nodeStack.top();
+            element->left->parent = element;
             nodeStack.pop();
+
             nodeStack.push(element);
         } else
             nodeStack.push(element);
+    }
+    for (auto element : nodes) {
+        if (element->payload == TERM) {
+            if (!element->parent || element->parent->payload != EQUALITY) {
+                throw std::string(element->term->symbol() +
+                                  " does never get assignment");
+            }
+        }
     }
     _tree = nodeStack.top();
 }
@@ -137,3 +163,9 @@ void Parser::createTerms() { _terms = getArgs(); }
 std::vector<Term*> Parser::getTerms() { return _terms; }
 
 Node* Parser::expressionTree() { return _tree; }
+
+std::string Parser::getResult() {
+    std::ostringstream oss;
+    oss << _tree->getResult() << ".";
+    return oss.str();
+}
