@@ -3,7 +3,6 @@
 #include <string>
 #include "include/scanner.h"
 #include "include/parser.h"
-#include "include/node.h"
 
 TEST(ShellExpression, varMatchAtomSuc) {
     Scanner s("FILCO=awesome.");

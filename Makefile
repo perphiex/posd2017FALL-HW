@@ -49,11 +49,6 @@ clean:
 	$(RM) $(TEST_EXE_FILE_DIR)/$(TEST_EXE_FILE_NAME)
 	$(RM) $(BUILD_DIR)/*.o
 	$(RM) $(BUILD_DIR)/*.d
-	$(RM) $(BUILD_DIR)/*.gcov
-	$(RM) $(BUILD_DIR)/*.gcno
-	$(RM) $(BUILD_DIR)/*.gcda
-	$(RM) -r out
-	$(RM) cov.info
 
 test: all
 	$(TEST_EXE_FILE_DIR)/$(TEST_EXE_FILE_NAME)
