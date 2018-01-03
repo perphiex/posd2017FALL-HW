@@ -7,6 +7,7 @@ ifeq ($(OS), Windows_NT)
 	CXX = g++
 	CXXFLAGS = -std=gnu++0x
 	LIBS = -lgtest
+	RM = del
 endif
 
 SOURCE_DIR = src
