@@ -386,7 +386,7 @@ TEST(ShellExpression, disjunctionMatching5) {
          *  maybe your implementation here.
          */
 
-        ASSERT_EQ("X = 1; Y = 2.", result);
+        ASSERT_EQ("X = 1; true; Y = 2.", result);
     } catch (std::string& msg) {
         FAIL() << msg;
     }

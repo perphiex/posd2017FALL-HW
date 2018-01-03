@@ -3,9 +3,6 @@
 #include "../include/atom.h"
 #include "../include/struct.h"
 #include "../include/list.h"
-#include "../include/listIterator.h"
-#include "../include/dfsIterator.h"
-#include "../include/bfsIterator.h"
 
 List::List() : Struct(Atom("."), {}){};
 List::List(Term* head, Term* tail) : Struct(Atom("."), {head, tail}) {}
@@ -65,14 +62,4 @@ std::string List::value() {
     }
     oss << "]";
     return oss.str();
-}
-
-Iterator<Term*>* List::createIterator() { return new ListIterator(this); }
-
-Iterator<Term*>* List::createDFSIterator() {
-    return new DFSIterator<Term*>(this);
-}
-
-Iterator<Term*>* List::createBFSIterator() {
-    return new BFSIterator<Term*>(this);
 }

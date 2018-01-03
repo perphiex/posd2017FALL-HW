@@ -5,8 +5,6 @@
 
 #include "struct.h"
 class Term;
-template <typename T>
-class Iterator;
 
 class List : public Struct {
    private:
@@ -21,9 +19,6 @@ class List : public Struct {
     std::string symbol();
     std::string value();
     List* getList();
-    Iterator<Term*>* createIterator();
-    Iterator<Term*>* createDFSIterator();
-    Iterator<Term*>* createBFSIterator();
     Term* head();
     List* tail();
 };

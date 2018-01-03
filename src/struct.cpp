@@ -2,9 +2,6 @@
 #include "../include/term.h"
 #include "../include/atom.h"
 #include "../include/struct.h"
-#include "../include/structIterator.h"
-#include "../include/dfsIterator.h"
-#include "../include/bfsIterator.h"
 
 Struct::Struct(Atom functor, std::vector<Term*> args)
     : _functor(functor), _args(args) {}
@@ -50,13 +47,3 @@ bool Struct::match(Term& term) {
 }
 
 Struct* Struct::getStruct() { return this; }
-
-Iterator<Term*>* Struct::createIterator() { return new StructIterator(this); }
-
-Iterator<Term*>* Struct::createDFSIterator() {
-    return new DFSIterator<Term*>(this);
-}
-
-Iterator<Term*>* Struct::createBFSIterator() {
-    return new BFSIterator<Term*>(this);
-}

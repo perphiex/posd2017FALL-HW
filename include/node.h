@@ -8,32 +8,25 @@ static Operators operatorsEnum(std::string tokenString) {
         return EQUALITY;
     else if (tokenString == ",")
         return COMMA;
-    else if (tokenString == ";")
-        return SEMICOLON;
     else
-        return TERM;
+        return SEMICOLON;
 }
 
 static std::string operatorsEnumToString(Operators op) {
-     if (op == EQUALITY)
-        return "=";
-    else if (op == COMMA)
+    if (op == COMMA)
         return ",";
-    else if (op == SEMICOLON)
+    else
         return ";";
-    return "";
 }
 
 static int operatorsProity(Operators op) {
     switch (op) {
-        case EQUALITY:
-            return 300;
         case COMMA:
             return 200;
         case SEMICOLON:
             return 100;
         default:
-            return 999;
+            return 300;
     }
 }
 

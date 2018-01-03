@@ -1,6 +1,7 @@
 CXX = clang++
 CXXFLAGS = -std=c++11 -glldb
 LIBS = -lgtest -lpthread
+LDFLAGS =
 
 ifeq ($(OS), Windows_NT)
 	CXX = g++
@@ -34,10 +35,10 @@ all: testExe shell
 	
 	
 testExe: $(TEST_MAIN_OBJECTS) 
-	$(CXX) -o $(TEST_EXE_FILE_DIR)/$(TEST_EXE_FILE_NAME) $(TEST_MAIN_OBJECTS)  $(LIBS)
+	$(CXX) -o $(TEST_EXE_FILE_DIR)/$(TEST_EXE_FILE_NAME) $(TEST_MAIN_OBJECTS) $(LDFLAGS) $(LIBS)
 
 shell: $(MAIN_OBJECTS)
-	$(CXX) -o $(EXE_FILE_DIR)/$(EXE_FILE_NAME) $(MAIN_OBJECTS) $(LIBS)
+	$(CXX) -o $(EXE_FILE_DIR)/$(EXE_FILE_NAME) $(MAIN_OBJECTS) $(LDFLAGS) $(LIBS)
 
 
 $(BUILD_DIR)/%.o: $(SOURCE_DIR)/%.cpp
@@ -50,9 +51,14 @@ clean:
 	$(RM) $(TEST_EXE_FILE_DIR)/$(TEST_EXE_FILE_NAME)
 	$(RM) $(BUILD_DIR)/*.o
 	$(RM) $(BUILD_DIR)/*.d
+	$(RM) $(BUILD_DIR)/*.gcov
+	$(RM) $(BUILD_DIR)/*.gcno
+	$(RM) $(BUILD_DIR)/*.gcda
+	$(RM) -r out
+	$(RM) cov.info
 
 test: all
-		$(TEST_EXE_FILE_DIR)/$(TEST_EXE_FILE_NAME)
+	$(TEST_EXE_FILE_DIR)/$(TEST_EXE_FILE_NAME)
 
 test.%: all
-		$(TEST_EXE_FILE_DIR)/$(TEST_EXE_FILE_NAME) --gtest_filter=$(or $(word 2,$(subst ., ,$@)),$(value 2)).*
+	$(TEST_EXE_FILE_DIR)/$(TEST_EXE_FILE_NAME) --gtest_filter=$(or $(word 2,$(subst ., ,$@)),$(value 2)).*

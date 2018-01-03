@@ -49,23 +49,12 @@ std::string Node::getResult() {
         case SEMICOLON: {
             std::string leftResult = left->getResult();
             std::string rightResult = right->getResult();
-            if (leftResult == rightResult) {
-                oss << leftResult;
-
-            } else if (leftResult == "true") {
-                if (rightResult == "false") {
-                    oss << leftResult << "; " << rightResult;
-                } else {
-                    oss << rightResult;
-                }
-            } else if (leftResult == "false") {
+            if (leftResult == "false")
                 oss << rightResult;
-            } else if (rightResult != "true" && rightResult != "false") {
-                oss << leftResult << "; " << rightResult;
-            } else {
+            else if (rightResult == "false")
                 oss << leftResult;
-            }
-
+            else
+                oss << leftResult << "; " << rightResult;
             break;
         }
         case EQUALITY: {

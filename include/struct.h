@@ -5,9 +5,6 @@
 #include "term.h"
 #include "atom.h"
 
-template <typename T>
-class Iterator;
-
 class Struct : public Term {
    protected:
     Atom _functor;
@@ -19,9 +16,6 @@ class Struct : public Term {
     std::string value();
     bool match(Term&);
     Struct* getStruct();
-    Iterator<Term*>* createIterator();
-    Iterator<Term*>* createDFSIterator();
-    Iterator<Term*>* createBFSIterator();
     Atom functor();
     size_t arity();
     Term* args(size_t);
