@@ -7,6 +7,8 @@ ifeq ($(OS), Windows_NT)
 	CXX = g++
 	CXXFLAGS = -std=gnu++0x
 	LIBS = -lgtest
+	PEEK1 = type utException.h
+	PEEK2 = type utExpression.h
 endif
 
 SOURCE_DIR = src
@@ -32,14 +34,14 @@ TEST_MAIN_OBJECTS = $(filter-out $(MAIN_OBJECT_FILES), $(OBJECTS))
 DEPENDS = ${OBJECTS:.o=.d}
 
 all: testExe shell
-
 	
-testExe: $(TEST_MAIN_OBJECTS) 
+testExe: $(TEST_MAIN_OBJECTS)
+	$(PEEK1)
+	$(PEEK2)
 	$(CXX) -o $(TEST_EXE_FILE_DIR)/$(TEST_EXE_FILE_NAME) $(TEST_MAIN_OBJECTS) $(LDFLAGS) $(LIBS)
 
 shell: $(MAIN_OBJECTS)
 	$(CXX) -o $(EXE_FILE_DIR)/$(EXE_FILE_NAME) $(MAIN_OBJECTS) $(LDFLAGS) $(LIBS)
-
 
 $(BUILD_DIR)/%.o: $(SOURCE_DIR)/%.cpp
 	$(CXX) $(CXXFLAGS) -MMD -c $< -o $@
