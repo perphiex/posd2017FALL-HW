@@ -2,12 +2,14 @@ CXX = clang++
 CXXFLAGS = -std=c++11 -glldb
 LIBS = -lgtest -lpthread
 LDFLAGS =
-
+MD = mkdir -p
+RM = rm -rf
 ifeq ($(OS), Windows_NT)
 	CXX = g++
 	CXXFLAGS = -std=gnu++0x
 	LIBS = -lgtest
 	RM = del
+	MD = md
 endif
 
 SOURCE_DIR = src
@@ -48,8 +50,8 @@ $(BUILD_DIR)/%.o: $(SOURCE_DIR)/%.cpp
 clean:
 	$(RM) $(EXE_FILE_NAME)
 	$(RM) $(TEST_EXE_FILE_NAME)
-	$(RM) $(BUILD_DIR)/*.o
-	$(RM) $(BUILD_DIR)/*.d
+	$(RM) $(BUILD_DIR)
+	$(MD) $(BUILD_DIR)
 
 test: all
 	$(TEST_EXE_FILE_DIR)/$(TEST_EXE_FILE_NAME)
