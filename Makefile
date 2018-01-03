@@ -10,6 +10,7 @@ ifeq ($(OS), Windows_NT)
 	LIBS = -lgtest
 	RM = del
 	MD = md
+	PEEK = dir
 endif
 
 SOURCE_DIR = src
@@ -48,6 +49,7 @@ $(BUILD_DIR)/%.o: $(SOURCE_DIR)/%.cpp
 -include ${DEPENDS}
 
 clean:
+	$(PEEK)
 	$(RM) $(EXE_FILE_NAME)
 	$(RM) $(TEST_EXE_FILE_NAME)
 	$(RM) $(BUILD_DIR)
