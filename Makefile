@@ -46,8 +46,8 @@ $(BUILD_DIR)/%.o: $(SOURCE_DIR)/%.cpp
 -include ${DEPENDS}
 
 clean:
-	$(RM) $(EXE_FILE_DIR)/$(EXE_FILE_NAME)
-	$(RM) $(TEST_EXE_FILE_DIR)/$(TEST_EXE_FILE_NAME)
+	$(RM) $(EXE_FILE_NAME)
+	$(RM) $(TEST_EXE_FILE_NAME)
 	$(RM) $(BUILD_DIR)/*.o
 	$(RM) $(BUILD_DIR)/*.d
 
