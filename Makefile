@@ -32,7 +32,7 @@ TEST_MAIN_OBJECTS = $(filter-out $(MAIN_OBJECT_FILES), $(OBJECTS))
 DEPENDS = ${OBJECTS:.o=.d}
 
 all: testExe shell
-	
+
 	
 testExe: $(TEST_MAIN_OBJECTS) 
 	$(CXX) -o $(TEST_EXE_FILE_DIR)/$(TEST_EXE_FILE_NAME) $(TEST_MAIN_OBJECTS) $(LDFLAGS) $(LIBS)
